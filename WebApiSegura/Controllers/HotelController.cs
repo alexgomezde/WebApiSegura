@@ -10,7 +10,7 @@ using WebApiSegura.Models;
 
 namespace WebApiSegura.Controllers
 {
-    [AllowAnonymous]
+    [Authorize]
     [RoutePrefix("api/hotel")]
     public class HotelController : ApiController
     {
@@ -123,7 +123,9 @@ namespace WebApiSegura.Controllers
 
             using (SqlConnection sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["RESERVAS"].ConnectionString))
             {
-                SqlCommand sqlCommand = new SqlCommand(@" INSERT INTO HOTEL(HOT_NOMBRE, HOT_EMAIL, HOT_DIRECCION, HOT_TELEFONO, HOT_CATEGORIA) VALUES (@HOT_NOMBRE, @HOT_EMAIL, @HOT_DIRECCION, @HOT_TELEFONO, @HOT_CATEGORIA)", sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand(@" INSERT INTO HOTEL(HOT_NOMBRE, HOT_EMAIL, HOT_DIRECCION, HOT_TELEFONO, HOT_CATEGORIA) 
+                                                        VALUES (@HOT_NOMBRE, @HOT_EMAIL, @HOT_DIRECCION, @HOT_TELEFONO, @HOT_CATEGORIA)",
+                                                        sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@HOT_NOMBRE", hotel.HOT_NOMBRE);
                 sqlCommand.Parameters.AddWithValue("@HOT_EMAIL", hotel.HOT_EMAIL);
                 sqlCommand.Parameters.AddWithValue("@HOT_DIRECCION", hotel.HOT_DIRECCION);
@@ -163,7 +165,9 @@ namespace WebApiSegura.Controllers
 
             using (SqlConnection sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["RESERVAS"].ConnectionString))
             {
-                SqlCommand sqlCommand = new SqlCommand(@" UPDATE HOTEL SET HOT_NOMBRE = @HOT_NOMBRE, HOT_EMAIL = @HOT_EMAIL, HOT_DIRECCION = @HOT_DIRECCION, HOT_TELEFONO = @HOT_TELEFONO, HOT_CATEGORIA = @HOT_CATEGORIA WHERE HOT_CODIGO = @HOT_CODIGO)", sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand(@"UPDATE HOTEL SET HOT_NOMBRE = @HOT_NOMBRE, HOT_EMAIL = @HOT_EMAIL, 
+                                                        HOT_DIRECCION = @HOT_DIRECCION, HOT_TELEFONO = @HOT_TELEFONO, HOT_CATEGORIA = @HOT_CATEGORIA
+                                                        WHERE HOT_CODIGO = @HOT_CODIGO", sqlConnection);
 
                 sqlCommand.Parameters.AddWithValue("@HOT_CODIGO", hotel.HOT_CODIGO);
                 sqlCommand.Parameters.AddWithValue("@HOT_NOMBRE", hotel.HOT_NOMBRE);
@@ -204,7 +208,7 @@ namespace WebApiSegura.Controllers
 
             using (SqlConnection sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["RESERVAS"].ConnectionString))
             {
-                SqlCommand sqlCommand = new SqlCommand(@" DELETE HOTEL WHERE HOT_CODIGO = @HOT_CODIGO)", sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand(@" DELETE HOTEL WHERE HOT_CODIGO = @HOT_CODIGO", sqlConnection);
 
                 sqlCommand.Parameters.AddWithValue("@HOT_CODIGO", id);
 

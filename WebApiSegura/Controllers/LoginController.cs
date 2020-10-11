@@ -66,7 +66,7 @@ namespace WebApiSegura.Controllers
                 SqlDataReader sqlDataReader = sqlCommand.ExecuteReader(); // ejecutar la consulta
                 while (sqlDataReader.Read())
                 {
-                    if (loginRequest.Password.Equals(sqlDataReader.GetString(3)))
+                    if (loginRequest.Password.Equals(sqlDataReader.GetString(3).Trim()))
                     {
                         usuario.USU_CODIGO = sqlDataReader.GetInt32(0);
                         usuario.USU_IDENTIFICACION = sqlDataReader.GetString(1);

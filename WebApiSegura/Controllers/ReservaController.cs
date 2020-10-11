@@ -10,7 +10,7 @@ using WebApiSegura.Models;
 
 namespace WebApiSegura.Controllers
 {
-    [AllowAnonymous]
+    [Authorize]
     [RoutePrefix("api/reserva")]
     public class ReservaController : ApiController
     {
@@ -157,7 +157,7 @@ namespace WebApiSegura.Controllers
                 {
                     SqlCommand sqlCommand = new SqlCommand(@"UPDATE RESERVA SET USU_CODIGO = @USU_CODIGO, HAB_CODIGO = @HAB_CODIGO, 
                                                         RES_FECHA_INGRESO = @RES_FECHA_INGRESO, RES_FECHA_SALIDA = @RES_FECHA_SALIDA 
-                                                        WHERE RES_CODIGO = @RES_CODIGO)", sqlConnection);
+                                                        WHERE RES_CODIGO = @RES_CODIGO", sqlConnection);
 
                     sqlCommand.Parameters.AddWithValue("@RES_CODIGO", reserva.RES_CODIGO);
                     sqlCommand.Parameters.AddWithValue("@USU_CODIGO", reserva.USU_CODIGO);
@@ -198,7 +198,7 @@ namespace WebApiSegura.Controllers
 
                 using (SqlConnection sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["RESERVAS"].ConnectionString))
                 {
-                    SqlCommand sqlCommand = new SqlCommand(@"DELETE RESERVA WHERE RES_CODIGO = @RES_CODIGO)", sqlConnection);
+                    SqlCommand sqlCommand = new SqlCommand(@"DELETE RESERVA WHERE RES_CODIGO = @RES_CODIGO", sqlConnection);
 
                     sqlCommand.Parameters.AddWithValue("@RES_CODIGO", id);
 

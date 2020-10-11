@@ -10,7 +10,7 @@ using WebApiSegura.Models;
 
 namespace WebApiSegura.Controllers
 {
-    [AllowAnonymous]
+    [Authorize]
     [RoutePrefix("api/habitacion")]
     public class HabitacionController : ApiController
     {
@@ -167,7 +167,7 @@ namespace WebApiSegura.Controllers
                 SqlCommand sqlCommand = new SqlCommand(@"UPDATE HABITACION SET HOT_CODIGO = @HOT_CODIGO, HAB_NUMERO = @HAB_NUMERO, HAB_CAPACIDAD = @HAB_CAPACIDAD, 
                                                         HAB_TIPO = @HAB_TIPO, HAB_DESCRIPCION = @HAB_DESCRIPCION, HAB_ESTADO = @HAB_ESTADO,
                                                         HAB_PRECIO = @HAB_PRECIO
-                                                        WHERE HAB_CODIGO = @HAB_CODIGO)", sqlConnection);
+                                                        WHERE HAB_CODIGO = @HAB_CODIGO", sqlConnection);
 
                 sqlCommand.Parameters.AddWithValue("@HAB_CODIGO", habitacion.HAB_CODIGO);
                 sqlCommand.Parameters.AddWithValue("@HOT_CODIGO", habitacion.HOT_CODIGO);
@@ -210,7 +210,7 @@ namespace WebApiSegura.Controllers
 
             using (SqlConnection sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["RESERVAS"].ConnectionString))
             {
-                SqlCommand sqlCommand = new SqlCommand(@" DELETE HABITACION WHERE HAB_CODIGO = @HAB_CODIGO)", sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand(@" DELETE HABITACION WHERE HAB_CODIGO = @HAB_CODIGO", sqlConnection);
 
                 sqlCommand.Parameters.AddWithValue("@HAB_CODIGO", id);
 
