@@ -44,7 +44,8 @@ namespace WebApiSegura.Controllers
             if (!string.IsNullOrEmpty(usuarioValidado.USU_IDENTIFICACION))
             {
                 var token = TokenGenerator.GenerateTokenJwt(login.Username);
-                return Ok(token);
+                usuarioValidado.CadenaToken = token; // agregada
+                return Ok(usuarioValidado);
             }
             else
             {

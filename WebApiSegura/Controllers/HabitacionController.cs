@@ -24,7 +24,7 @@ namespace WebApiSegura.Controllers
                 using (SqlConnection sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["RESERVAS"].ConnectionString))
                 {
                     SqlCommand sqlCommand = new SqlCommand(@"SELECT HAB_CODIGO, HOT_CODIGO, HAB_NUMERO, HAB_CAPACIDAD, HAB_TIPO, HAB_DESCRIPCION, 
-                                                            HAB_ESTADO, HAB_PRECIO FROM HABITACION WHERE HAB_CODIGO = @HAB_CODIGO");
+                                                            HAB_ESTADO, HAB_PRECIO FROM HABITACION WHERE HAB_CODIGO = @HAB_CODIGO", sqlConnection);
 
                     sqlCommand.Parameters.AddWithValue("@HAB_CODIGO", id);
 
@@ -66,7 +66,7 @@ namespace WebApiSegura.Controllers
                 using (SqlConnection sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["RESERVAS"].ConnectionString))
                 {
                     SqlCommand sqlCommand = new SqlCommand(@"SELECT HAB_CODIGO, HOT_CODIGO, HAB_NUMERO, HAB_CAPACIDAD, HAB_TIPO, HAB_DESCRIPCION, 
-                                                            HAB_ESTADO, HAB_PRECIO FROM HABITACION");
+                                                            HAB_ESTADO, HAB_PRECIO FROM HABITACION", sqlConnection);
 
                     sqlConnection.Open();
 
@@ -86,7 +86,8 @@ namespace WebApiSegura.Controllers
                             HAB_PRECIO = sqlDataReader.GetDecimal(7)
 
                         };
-                        
+
+                        habitaciones.Add(habitacion);
                     }
 
                     sqlConnection.Close();

@@ -25,7 +25,7 @@ namespace WebApiSegura.Controllers
                     using (SqlConnection sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["RESERVAS"].ConnectionString))
                     {
                         SqlCommand sqlCommand = new SqlCommand(@"SELECT RES_CODIGO, USU_CODIGO, HAB_CODIGO, RES_FECHA_INGRESO, RES_FECHA_SALIDA
-                                                                FROM RESERVA WHERE RES_CODIGO = @RES_CODIGO");
+                                                                FROM RESERVA WHERE RES_CODIGO = @RES_CODIGO", sqlConnection);
 
                         sqlCommand.Parameters.AddWithValue("@RES_CODIGO", id);
 
@@ -64,7 +64,7 @@ namespace WebApiSegura.Controllers
                     using (SqlConnection sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["RESERVAS"].ConnectionString))
                     {
                         SqlCommand sqlCommand = new SqlCommand(@"SELECT RES_CODIGO, USU_CODIGO, HAB_CODIGO, RES_FECHA_INGRESO, RES_FECHA_SALIDA
-                                                                FROM RESERVA");
+                                                                FROM RESERVA", sqlConnection);
 
                         sqlConnection.Open();
 
@@ -81,6 +81,8 @@ namespace WebApiSegura.Controllers
                                 RES_FECHA_SALIDA = sqlDataReader.GetDateTime(4)
 
                             };
+
+                        reservaciones.Add(reserva);
 
                         }
 

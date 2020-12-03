@@ -13,5 +13,6 @@ namespace WebApiSegura.Models
         public string USU_ESTADO { get; set; }
         public DateTime USU_FEC_NAC { get; set; }
         public string USU_TELEFONO { get; set; }
+        public string CadenaToken { get; set; }
     }
 }
